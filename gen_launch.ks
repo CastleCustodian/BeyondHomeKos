@@ -61,6 +61,8 @@ wait until eta:apoapsis < 15.
 lock thrott to 0.1.
 wait until ship:periapsis > curap - 20.
 lock thrott to 0.
+print "Orbit circualrized.".
+print "Eccentricity: " + ship:orbit:eccentricity.
 
 set ship:control:pilotmainthrottle to 0.
 unlock steering.
