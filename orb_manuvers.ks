@@ -4,8 +4,15 @@
 
 function plane_change {
     //acceptes any kos orbit structure
-    //assumes that you are currently in a circular orbit
     parameter goalorb.
+
+    //check if you are currently in a circular enough orbit and error out if not
+    if ship:orbit:eccentricity > 0.05 {
+        print "error ship is not in a circular enough orbit halting.".
+        until false {
+            wait 60.
+        }
+    }
 
     //get ready for plane change
     //calculate relevant vectors 
