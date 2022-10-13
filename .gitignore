@@ -1,0 +1,5 @@
+#ignore random notes and databases
+*.txt
+*.csv
+#ignore vscodefiles
+*.code-workspace
