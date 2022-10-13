@@ -3,3 +3,5 @@
 *.csv
 #ignore vscodefiles
 *.code-workspace
+#ignore temp files
+temp.ks
