@@ -52,9 +52,10 @@ function plane_change {
         set node_vec to vcrs(goalorb_normal, ship_normal):normalized.
         set orbit_pos to vang(ship:body:position, node_vec).
         set orbit_angle to vang(goalorb_normal, ship_normal).
-        print "pos: " + orbit_pos + " Ang: " + orbit_angle.
         wait 1.
     }
+    print "Correcting inclination.".
+    print "inc diff at start: " + orbit_angle.
     lock throttle to min(1,(orbit_angle / 2)).
     until orbit_pos > 1 or orbit_angle < 0.01 {
         set goalorb_normal to calc_normal(goalorb).
@@ -66,4 +67,6 @@ function plane_change {
         wait 0.1.
     }
     lock throttle to 0.
+    print "That's all for this pass.".
+    print "inc diff now: " + orbit_angle.
 }
