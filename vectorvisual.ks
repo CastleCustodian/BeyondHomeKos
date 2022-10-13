@@ -1,0 +1,2 @@
+//vector visualize
+vecDraw(solarPrimeVector).
