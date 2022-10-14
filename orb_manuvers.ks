@@ -21,37 +21,17 @@ function plane_change {
     set node_vec to vcrs(goalorb_normal, ship_normal):normalized.
     set orbit_pos to vang(ship:body:position, node_vec).
     set orbit_angle to vang(goalorb_normal, ship_normal).
+    wait 1.
+    set orbit_pos_check to vang(ship:body:position, node_vec).
+    set orbit_pos_full to orbit_pos.
+    if orbit_pos_check > orbit_pos {
+        set orbit_pos_full to orbit_pos + 180.
+    }
+    set wrptime to (orbit_pos_full * ship:orbit:period / 360) - 90.
     lock steering to ship_normal.
     wait until vang(ship_normal,ship:facing:forevector) < 1.
-    //warp to plane change
     print "Warping to node for plane change.".
-    set kuniverse:timewarp:rate to 100.
-    until orbit_pos > 21{
-        set goalorb_normal to calc_normal(goalorb).
-        set ship_normal to calc_normal(ship).
-        set node_vec to vcrs(goalorb_normal, ship_normal):normalized.
-        set orbit_pos to vang(ship:body:position, node_vec).
-        set orbit_angle to vang(goalorb_normal, ship_normal).
-        wait 0.1.
-    }
-    until orbit_pos < 20{
-        set goalorb_normal to calc_normal(goalorb).
-        set ship_normal to calc_normal(ship).
-        set node_vec to vcrs(goalorb_normal, ship_normal):normalized.
-        set orbit_pos to vang(ship:body:position, node_vec).
-        set orbit_angle to vang(goalorb_normal, ship_normal).
-        wait 0.1.
-    }
-    set kuniverse:timewarp:rate to 10.
-    until orbit_pos < 3{
-        set goalorb_normal to calc_normal(goalorb).
-        set ship_normal to calc_normal(ship).
-        set node_vec to vcrs(goalorb_normal, ship_normal):normalized.
-        set orbit_pos to vang(ship:body:position, node_vec).
-        set orbit_angle to vang(goalorb_normal, ship_normal).
-        wait 0.1.
-    }
-    kuniverse:timewarp:cancelwarp().
+    kuniverse:timewarp:warpto(wrptime).
     // wait until you are 10 seconds from the node
     until orbit_pos < ((10 / ship:orbit:period) * 360) {
         set goalorb_normal to calc_normal(goalorb).
